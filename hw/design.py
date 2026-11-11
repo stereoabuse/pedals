@@ -33,15 +33,15 @@ LCSC = {
     ("R", "4.7k"): "C23162", ("R", "6.8k"): "C23212", ("R", "10k"): "C25804", ("R", "22k"): "C31850",
     ("R", "33k"): "C4216", ("R", "39k"): "C23153", ("R", "100k"): "C25803", ("R", "150k"): "C22807",
     ("R", "220k"): "C22961", ("R", "470k"): "C23178", ("R", "1M"): "C22935",
-    ("C", "47p"): "C1671", ("C", "100p"): "C14858", ("C", "120p"): "C107035", ("C", "1n"): "C1588",
-    ("C", "3.3n NP0"): "C107048", ("C", "4.7n NP0"): "C576818", ("C", "10n NP0"): "C2894187",
+    ("C", "47p"): "C1671", ("C", "100p"): "C14858", ("C", "1n"): "C1588",
+    ("C", "3.3n"): "C1613", ("C", "4.7n"): "C53987", ("C", "10n NP0"): "C2894187",
     ("C", "10n"): "C57112", ("C", "47n"): "C1622", ("C", "100n"): "C14663", ("C", "470n"): "C1623",
     ("C", "1u"): "C15849",
     ("C12", "47n NP0"): "C5451690", ("C12", "100n NP0"): "C170182",
     ("C08", "10u"): "C15850", ("CP", "100u 35V"): "C2836442",
     ("D", "1N4148W"): "C81598", ("D", "B5819W"): "C8598", ("LED", "RED"): "C2286",
     ("U", "TL072"): "C6961", ("U", "LM358"): "C7950", ("C", "22n"): "C21122", ("U", "TC7660S"): "C636973", ("Q", "MMBF4393"): "C152291",
-    ("RV", "100k"): "C51284", ("RV", "20k"): "C55069",
+    ("RV", "100k"): "C51284",
 }
 
 # ref kind value nets...   (pads in the order given in KINDS)
@@ -92,7 +92,7 @@ C2    C    47p     U1AP GND
 R5    R    39k     U1AN S1
 R4    R    22k     U1AN VREF
 R40   R    4.7k    U1AN BX
-RV7   RV   20k     BX BY BY
+RV7   RV   100k    BX BY BY
 C40   C12  47n_NP0 BY BQ
 Q2    Q    MMBF4393 BQ VREF BG
 R41   R    1M      BQ VREF
@@ -121,7 +121,7 @@ C9    C    47p     U1BN S2
 C11   C12  47n_NP0 S2 N11
 R11   R    22k     N11 U2AN
 R13   R    220k    U2AN S3
-C12   C    120p    U2AN S3
+C12   C    100p    U2AN S3
 R12   R    22k     U2AN ND
 SW1   SW   CLIP    CLA ND CLB
 D4    D    1N4148W CLA D45
@@ -145,9 +145,9 @@ LED3  LED  RED     NH VREF
 LED4  LED  RED     VREF NH
 # --- treble + depth stage ---
 RV4   POT  B100K_TREBLE T1 TW NH
-C15   C    4.7n_NP0 T1 GND
+C15   C    4.7n T1 GND
 C16A  C    10n_NP0 U3AN S5
-C16B  C    4.7n_NP0 U3AN S5
+C16B  C    4.7n U3AN S5
 R19   R    33k     U3AN NM
 R20   R    33k     NM S5
 C17A  C    100n    NM NDP
@@ -163,9 +163,9 @@ C52   C    47p     U3BN S6
 R50   R    10k     S5 MA
 R51   R    10k     S6 MB
 RV5   POT  B100K_MID MB MW MA
-C50   C    3.3n_NP0 MA MB
+C50   C    3.3n MA MB
 C51A  C    10n_NP0 MW MX
-C51B  C    4.7n_NP0 MW MX
+C51B  C    4.7n MW MX
 R52   R    2.2k    MX U3BN
 C18   C    1u      S6 NO
 R21   R    1k      NO V3

@@ -12,7 +12,7 @@ def val(v):
 
 POTS = {"RV1": ("tight", "C", 100e3), "RV2": ("gain", "A", 1e6), "RV3": ("pres", "C", 10e3),
         "RV4": ("treble", "B", 100e3), "RV5": ("mid", "B", 100e3), "RV6": ("vol", "A", 10e3),
-        "RV7": ("boost_trim", "B", 20e3), "RV8": ("trim", "B", 100e3), "RV9": ("gate_trim", "B", 100e3)}
+        "RV7": ("boost_trim", "B", 100e3), "RV8": ("trim", "B", 100e3), "RV9": ("gate_trim", "B", 100e3)}
 
 def deck(extra="", vcc=16.5, boost=False, clip="stock", depth="off", gate=True, **pos):
     s = dict(tight=.3, gain=.5, pres=.5, treble=.6, mid=.5, vol=.5, boost_trim=0, trim=.3, gate_trim=.5)

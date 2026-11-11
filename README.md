@@ -35,7 +35,7 @@ Files are in [fab/](fab/).
 3. Upload `hg-preamp-revA-bom.csv` and `hg-preamp-revA-cpl.csv`.
 4. In the placement preview, check pin 1 on U1 to U6, the two JFETs (Q1, Q2), the diode cathode bars, and the stripe on C20, C27, C28. JLC's rotation convention differs from KiCad's for some packages; the CPL already applies the usual corrections, but this is the step to catch a mistake.
 
-40 BOM lines, 120 placements. 11 of the lines are JLC "extended" parts (a small one-time fee each). Stock was checked on 2026-11-11.
+38 BOM lines, 120 placements. 7 of the lines are JLC "extended" parts (a small one-time fee each). Stock was checked on 2026-11-11.
 
 ## Parts you solder
 
@@ -106,7 +106,7 @@ Use a regulated 9 V centre-negative supply only. The charge pump chip is rated t
 ## Setting the trimmers
 
 - GAIN TRIM: sets how hard the last gain stage is driven. Start at halfway.
-- BST LVL: boost amount and voicing. One end is a tight mid/treble push, the other a mild full-range lift.
+- BST LVL: boost amount and voicing. One end is a tight mid/treble push (+12 dB above 700 Hz), the other a very mild full-range lift (+1 dB). Most of the useful range is in the first quarter of the turn.
 - GATE: threshold. Turn until hiss cuts off when you mute the strings but sustained notes do not chop.
 
 Toggle positions as designed (seen from the front): Clip lever left is stock, centre is open, right is saturated. Depth lever left is medium, centre is flat, right is deep. If a switch you buy works the other way round, turn it 180 degrees.
