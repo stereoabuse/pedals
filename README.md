@@ -119,11 +119,28 @@ Toggle positions as designed (seen from the front): Clip lever left is stock, ce
 
 ## How the board was made
 
-Everything is generated from [hw/design.py](hw/design.py), which holds the full netlist with JLC part numbers. There is no drawn KiCad schematic; the reference drawing is the PedalPCB one and the differences are listed above.
+Everything is generated from [hw/design.py](hw/design.py), which holds the full netlist with JLC part numbers.
+
+## Schematic
+
+[docs/schematic.pdf](docs/schematic.pdf), five sheets. It is drawn by `hw/schematic.py`, which extracts the connectivity of the drawing and refuses to write it unless every pin matches the board netlist, so the drawing and the board cannot drift apart. It is a drawing, not a KiCad schematic file.
+
+| Sheet | Contents |
+|---|---|
+| [1](docs/schematic-1.png) | Power, voltage doubler, VREF, indicator LEDs |
+| [2](docs/schematic-2.png) | Input stage, boost, Tight, gain stage |
+| [3](docs/schematic-3.png) | Clip stage, gain trim, Presence, hard clip, gate switch |
+| [4](docs/schematic-4.png) | Treble, Depth, Mid, output |
+| [5](docs/schematic-5.png) | Noise gate sidechain |
+
+Regenerate with `uv run --with matplotlib python3 hw/schematic.py`.
+
+## Scripts
 
 | Step | Script |
 |---|---|
 | Simulate the netlist in ngspice | `sim/from_design.py` |
+| Draw and verify the schematic | `hw/schematic.py` |
 | Place parts | `hw/place.py` |
 | Build the KiCad board | `hw/build_pcb.py` |
 | Route (own grid router) | `hw/route.py` |
