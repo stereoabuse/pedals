@@ -4,7 +4,7 @@ Coordinates are KiCad mm, viewed from the SMD (front copper) side, which faces
 the back of the pedal. Front-panel x is mirrored: x_panel = 100 - x.
 """
 
-NAME = "SLAB"
+NAME = "HG PREAMP"
 REV = "A"
 
 # kind -> (footprint, pad names in order)
