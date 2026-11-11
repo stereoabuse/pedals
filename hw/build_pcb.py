@@ -7,6 +7,7 @@ from pcbnew import FromMM, ToMM, VECTOR2I
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from design import parts, REV
+import models3d
 NAME = "HG PREAMP"
 
 LIB = "/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints"
@@ -18,7 +19,7 @@ TRACK, CLEAR, VIA, VIA_DRILL = 0.25, 0.2, 0.6, 0.3
 POT_LABEL = {"RV1": "TIGHT", "RV2": "GAIN", "RV3": "PRES", "RV4": "TREBLE", "RV5": "MID", "RV6": "VOLUME"}
 PAD_LABEL = {"J_IN": "IN", "J_G2": "G", "J_L1": "L1", "J_L1B": "L1", "J_L2": "L2", "J_BST": "BST",
              "J_G3": "G", "J_9V": "+9V", "J_G1": "G", "J_G4": "G", "J_OUT": "OUT"}
-SMD_LABEL = {"RV7": "BOOST", "RV8": "GAIN TRIM", "RV9": "GATE", "JP1": "18V  9V", "JP2": "GATE",
+SMD_LABEL = {"RV7": "BST LVL", "RV8": "GAIN TRIM", "RV9": "GATE", "JP1": "18V  9V", "JP2": "GATE",
              "TP1": "VCC", "TP2": "VREF", "TP3": "9V"}
 
 
@@ -78,6 +79,7 @@ def tht_pad(fp, num, x, y, dia, drill, net):
 
 
 def main():
+    models3d.write_all(os.path.join(HERE, "3d"))
     board = pcbnew.CreateEmptyBoard()
     board.SetCopperLayerCount(4)
     board.SetLayerType(pcbnew.In1_Cu, pcbnew.LT_POWER)
@@ -89,6 +91,7 @@ def main():
     ds.m_CopperEdgeClearance = FromMM(0.3); ds.m_MinClearance = FromMM(0.15)
     ds.m_HoleClearance = FromMM(0.2); ds.m_HoleToHoleMin = FromMM(0.25)
     ds.m_SolderMaskExpansion = FromMM(0.05)
+    ds.SetAuxOrigin(P(O["X0"], O["YB"]))
 
     # outline
     pts = outline_pts()
@@ -120,6 +123,14 @@ def main():
             fp.Reference().SetVisible(False); fp.Value().SetVisible(False)
             fp.Reference().SetLayer(pcbnew.F_Fab); fp.Value().SetLayer(pcbnew.F_Fab)
             board.Add(fp)
+            if kind in ("POT", "SW"):
+                sx, sy = PL["pots" if kind == "POT" else "sws"][ref]
+                m = pcbnew.FP_3DMODEL()
+                m.m_Filename = "${KIPRJMOD}/3d/%s.wrl" % ("pot16" if kind == "POT" else "toggle")
+                m.m_Scale = pcbnew.VECTOR3D(1 / 2.54, 1 / 2.54, 1 / 2.54)
+                m.m_Rotation = pcbnew.VECTOR3D(0, 180, 0)        # hangs off the back of the board
+                m.m_Offset = pcbnew.VECTOR3D(sx - cx, -(sy - cy), -1.6)
+                fp.Models().push_back(m)
             if kind == "POT":
                 sx, sy = PL["pots"][ref]
                 circle(board, sx, sy, 8.5, pcbnew.B_SilkS)
@@ -190,6 +201,7 @@ def main():
 
     # branding
     text(board, "stereoabuse", 81.6, 112.0, pcbnew.B_SilkS, 2.0, 0.3, rot=90)
+    text(board, "stereoabuse", 67.5, 70.6, pcbnew.F_SilkS, 1.5, 0.22)
     text(board, f"{NAME} rev {REV}", 118.6, 112.0, pcbnew.B_SilkS, 1.3, 0.2, rot=90)
     text(board, "9V DC ONLY", 100.0, 88.3, pcbnew.B_SilkS, 0.9, 0.15)
     text(board, "CENTER NEG", 100.0, 90.0, pcbnew.B_SilkS, 0.9, 0.15)

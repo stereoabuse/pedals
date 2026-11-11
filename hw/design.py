@@ -40,7 +40,7 @@ LCSC = {
     ("C12", "47n NP0"): "C5451690", ("C12", "100n NP0"): "C170182",
     ("C08", "10u"): "C15850", ("CP", "100u 35V"): "C2836442",
     ("D", "1N4148W"): "C81598", ("D", "B5819W"): "C8598", ("LED", "RED"): "C2286",
-    ("U", "TL072"): "C6961", ("U", "TC7660S"): "C636973", ("Q", "MMBF4393"): "C152291",
+    ("U", "TL072"): "C6961", ("U", "LM358"): "C7950", ("C", "22n"): "C21122", ("U", "TC7660S"): "C636973", ("Q", "MMBF4393"): "C152291",
     ("RV", "100k"): "C51284", ("RV", "20k"): "C55069",
 }
 
@@ -75,7 +75,7 @@ U1    U    TL072   S1 U1AN U1AP GND U1BP U1BN S2 VCC
 U2    U    TL072   S3 U2AN VREF GND VREF U2BN S4 VCC
 U3    U    TL072   S5 U3AN TW GND VREF U3BN S6 VCC
 U4    U    TL072   VREF VREF VBF GND NS U4BN SG VCC
-U5    U    TL072   CMP ENV NREF GND VREF SPARE SPARE VCC
+U5    U    LM358   CMP ENV NREF GND VREF SPARE SPARE VCC
 C6    C    100n    VCC GND
 C7    C    100n    VCC GND
 C10   C    100n    VCC GND
@@ -136,7 +136,9 @@ R15   R    10k     U2BN NTR
 RV8   RV   100k    NTR S4 S4
 C13   C    100p    U2BN S4
 # --- presence + hard clip ---
-RV3   POT  C10K_PRES NP NP S4
+C19   C    1u      S4 S4C
+RV3   POT  C10K_PRES NP NP S4C
+R24   R    470k    NH VREF
 R18   R    2.2k    NP NH
 C14   C    10n_NP0 NH GND
 LED3  LED  RED     NH VREF
@@ -153,6 +155,7 @@ C17B  C    47n     NM NDP
 R22   R    22k     NDP DPA
 R23   R    6.8k    NDP DPB
 SW2   SW   DEPTH   DPA GND DPB
+R25   R    1M      NDP GND
 # --- mid stage + output ---
 R53   R    100k    S5 U3BN
 R54   R    100k    U3BN S6
@@ -170,7 +173,7 @@ RV6   POT  A10K_VOLUME GND OUT V3
 J_OUT PAD  OUT     OUT
 J_G4  PAD  GND     GND
 # --- noise gate ---
-C60   C    10n_NP0 S1 NS
+C60   C    22n     S1 NS
 R60   R    100k    NS VREF
 R61   R    10k     U4BN N61
 RV9   RV   100k    N61 SG SG

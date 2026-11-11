@@ -27,7 +27,7 @@ def deck(extra="", vcc=16.5, boost=False, clip="stock", depth="off", gate=True, 
         elif k == "LED": L.append(f"D{r} {n[0]} {n[1]} LEDR")
         elif k == "LEDT": L.append(f"D{r} {n[0]} {n[1]} LEDR")
         elif k == "Q": L.append(f"J{r} {n[0]} {n[2]} {n[1]} J4393")
-        elif k == "U" and p["value"] == "TL072":
+        elif k == "U" and p["value"] in ("TL072", "LM358"):
             L.append(f"X{r}A {n[2]} {n[1]} {n[7]} {n[3]} {n[0]} OPA")
             L.append(f"X{r}B {n[4]} {n[5]} {n[7]} {n[3]} {n[6]} OPA")
         elif k in ("POT", "RV"):
