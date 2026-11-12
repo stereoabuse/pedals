@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80.0mm" height="150.0mm" viewBox="0 0 80.0 150.0" font-family="Helvetica" font-size="2.4">
+<rect x="10" y="10" width="60.0" height="112.0" rx="4" fill="none" stroke="black" stroke-width="0.2"/>
+<line x1="40.0" y1="10" x2="40.0" y2="122.0" stroke="#999" stroke-width="0.1" stroke-dasharray="1 1"/>
+<line x1="10" y1="66.0" x2="70.0" y2="66.0" stroke="#999" stroke-width="0.1" stroke-dasharray="1 1"/>
+<rect x="23.0" y="46.5" width="34.0" height="42.0" rx="1.5" fill="none" stroke="#9c9" stroke-width="0.15" stroke-dasharray="2 1"/>
+<text x="24.0" y="49.5" fill="#696">board (inside)</text>
+<rect x="26.75" y="45.0" width="26.5" height="48.5" fill="none" stroke="#99c" stroke-width="0.15" stroke-dasharray="2 1"/>
+<text x="40.0" y="91.0" text-anchor="middle" fill="#669">9V battery (behind the board)</text>
+<circle cx="40.00" cy="56.00" r="3.75" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M38.50 56.00h3M40.00 54.50v3" stroke="black" stroke-width="0.12"/>
+<text x="40.00" y="62.75" text-anchor="middle">TONE 7.5</text>
+<circle cx="40.00" cy="80.50" r="1.6" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M38.50 80.50h3M40.00 79.00v3" stroke="black" stroke-width="0.12"/>
+<text x="40.00" y="85.10" text-anchor="middle">LED 3.2</text>
+<circle cx="40.00" cy="106.00" r="6.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M38.50 106.00h3M40.00 104.50v3" stroke="black" stroke-width="0.12"/>
+<text x="40.00" y="115.25" text-anchor="middle">FOOTSWITCH 12.5</text>
+<text x="10" y="127.0">1590B2 face, FRONT view, 1:1 (print at 100%). mm from face centre: x right, y up.</text>
+<text x="10" y="131.0">Jacks and DC socket go on the top end wall (suggested: jacks 19 mm either</text>
+<text x="10" y="134.0">side of centre, DC socket in the centre). Mark those from the parts you buy.</text>
+<line x1="10" y1="138.0" x2="60" y2="138.0" stroke="black" stroke-width="0.3"/><text x="62" y="139.0">50 mm check</text>
+</svg>

@@ -1,6 +1,18 @@
 # pedals
 
-Guitar pedal boards by stereoabuse. Each folder is a complete, separate design: netlist, board, JLCPCB fabrication files, schematic, and build notes. Both are derived from the Friedman BE-OD circuit (via the public PedalPCB "Thermionic Distortion" schematic) and fit a Hammond 1590BB with a battery. Neither has been built yet.
+Guitar pedal boards by stereoabuse. Each folder is a complete, separate design: netlist, board, JLCPCB fabrication files, schematic, and build notes. None has been built yet.
+
+| Design | What it is | Enclosure |
+|---|---|---|
+| [preamp](preamp/) | High-gain preamp with a boost built into its first stage | 1590BB |
+| [boost-preamp](boost-preamp/) | Boost and high-gain preamp as two sections in series, for the band Manat | 1590BB |
+| [screamer](screamer/) | One-knob overdrive: a Tube Screamer with Drive at zero and Level at maximum, Tone only | 1590B2 |
+
+All three run from a 9 V supply or a battery.
+
+## The two preamps
+
+Both are derived from the Friedman BE-OD circuit (via the public PedalPCB "Thermionic Distortion" schematic).
 
 | | [preamp](preamp/) | [boost-preamp](boost-preamp/) |
 |---|---|---|
@@ -15,4 +27,8 @@ Guitar pedal boards by stereoabuse. Each folder is a complete, separate design: 
 |---|---|
 | ![preamp SMD side](preamp/docs/render-smd-side.png) | ![boost-preamp SMD side](boost-preamp/docs/render-smd-side.png) |
 
-`tools/jlc.py` looks up JLCPCB part stock and prices and is shared by both.
+## screamer
+
+![screamer SMD side](screamer/docs/render-smd-side.png)
+
+`tools/jlc.py` looks up JLCPCB part stock and prices and is shared by all of them.
