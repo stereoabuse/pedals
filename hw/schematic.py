@@ -1,7 +1,7 @@
 """Hand-laid-out schematic, drawn with matplotlib and checked against design.py.
 
 Run:  uv run --with matplotlib python3 hw/schematic.py
-Writes docs/schematic.pdf (5 pages) and docs/schematic-N.png.
+Writes docs/schematic.pdf (6 pages) and docs/schematic-N.png.
 
 Every symbol registers its pins and every wire its points, so the drawing's
 connectivity is extracted and compared with the netlist. A drawing that does not
@@ -323,13 +323,12 @@ def sheet_power():
     s.pad("TP1", 108, 26, "r")
     # indicator LEDs
     s.flag(70, 40, "V9"); s.w((70, 40), (72, 40)); s.R("R71", 75, 40, "r"); s.w((78, 40), (80, 40)); s.D("LED5", 82, 40, "r")
-    s.w((84, 40), (90, 40)); s.pad("J_L1", 90, 40, "r", "L1 pad (bypass side)")
-    s.w((88, 40), (88, 43), (90, 43)); s.pad("J_L1B", 90, 43, "r", "L1 pad (boost side)")
+    s.w((84, 40), (90, 40)); s.pad("J_L1", 90, 40, "r", "LED pad (boost side)")
     s.flag(70, 48, "V9"); s.w((70, 48), (72, 48)); s.R("R72", 75, 48, "r"); s.w((78, 48), (80, 48)); s.D("LED6", 82, 48, "r")
-    s.w((84, 48), (90, 48)); s.pad("J_L2", 90, 48, "r", "L2 pad")
-    s.note(70, 51, "LED5 = bypass, LED6 = boost. The footswitches ground L1 / join L2 to L1.")
-    for i, r in enumerate(("J_G1", "J_G2", "J_G3", "J_G4")):
-        x = 100 + 5 * i
+    s.w((84, 48), (90, 48)); s.pad("J_L2", 90, 48, "r", "LED pad (preamp side)")
+    s.note(70, 51, "LED5 = boost, LED6 = preamp. Each footswitch grounds its own LED pad.")
+    for i, r in enumerate(("J_G1", "J_G2", "J_G3", "J_G4", "J_G5")):
+        x = 104 + 5 * i
         s.pad(r, x, 38, "u", "G pad"); s.w((x, 38), (x, 40)); s.gnd(x, 40)
     # VREF
     s.flag(10, 56, "VCC"); s.w((10, 56), (10, 57)); s.R("R32", 10, 60, "d"); s.w((10, 63), (10, 65)); s.R("R33", 10, 68, "d"); s.gnd(10, 71)
@@ -338,8 +337,8 @@ def sheet_power():
     s.w((29, 68), (27, 68), (27, 72), (41, 72), (41, 66), (39, 66)); s.w((41, 66), (48, 66)); s.flag(45, 66, "VREF"); s.pad("TP2", 48, 66, "r")
     s.note(20, 75, "VREF = VCC / 2, buffered. Every op-amp stage is biased from it.")
     # op-amp supply pins
-    s.w((58, 56), (106, 56)); s.flag(58, 56, "VCC")
-    for i, (u, c) in enumerate((("U1", "C6"), ("U2", "C7"), ("U3", "C10"), ("U4", "C29"), ("U5", "C30"))):
+    s.w((58, 56), (116, 56)); s.flag(58, 56, "VCC")
+    for i, (u, c) in enumerate((("U1", "C6"), ("U2", "C7"), ("U3", "C10"), ("U4", "C29"), ("U5", "C30"), ("U7", "C87"))):
         x = 60 + 10 * i
         s.w((x, 56), (x, 61)); s.pwr(u, x, 64); s.gnd(x, 67)
         s.w((x + 4, 56), (x + 4, 60)); s.C(c, x + 4, 62, "d"); s.gnd(x + 4, 64)
@@ -347,22 +346,13 @@ def sheet_power():
 
 
 def sheet_input():
-    s = Sheet("2  Input stage, boost, Tight, gain stage")
+    s = Sheet("2  Preamp input stage, Tight, gain stage")
     s.pad("J_IN", 6, 28, "l"); s.w((6, 28), (13, 28)); s.w((10, 28), (10, 29)); s.R("R1", 10, 32, "d"); s.gnd(10, 35)
     s.C("C1", 15, 28, "r"); s.w((17, 28), (22, 28)); s.w((20, 28), (20, 27)); s.R("R2", 20, 24, "d"); s.flag(20, 21, "VREF")
     s.R("R3", 25, 28, "r"); s.w((28, 28), (35, 28)); s.w((29, 28), (29, 29)); s.C("C2", 29, 31, "d"); s.gnd(29, 33)
     s.opamp("U1", "A", 40, 30, plus_top=True)
     s.w((35, 32), (33, 32), (33, 38), (37, 38)); s.R("R5", 40, 38, "r"); s.w((43, 38), (47, 38), (47, 30), (45, 30))
     s.w((33, 38), (33, 39)); s.R("R4", 33, 42, "d"); s.flag(33, 45, "VREF", "d")
-    # boost leg
-    s.w((30, 38), (33, 38)); s.R("R40", 27, 38, "r"); s.w((24, 38), (22, 38)); s.pot("RV7", 19, 38, "r", "3")
-    s.w((19, 40), (16, 40)); s.w((16, 38), (16, 42)); s.C("C40", 16, 44, "d"); s.w((16, 46), (16, 48))
-    s.jfet("Q2", 16, 50); s.w((16, 47), (25, 47)); s.R("R41", 25, 50, "d"); s.w((16, 52), (16, 54)); s.w((25, 53), (25, 54), (16, 54)); s.flag(16, 54, "VREF", "d")
-    s.w((13, 50), (5, 50)); s.w((9, 50), (9, 51)); s.R("R42", 9, 54, "d"); s.flag(9, 57, "VREF", "d")
-    s.w((5, 50), (5, 52)); s.C("C41", 5, 54, "d"); s.w((5, 56), (5, 57), (9, 57))
-    s.w((5, 50), (5, 48)); s.D("D12", 5, 46, "u"); s.w((5, 44), (5, 43)); s.R("R43", 5, 40, "d"); s.flag(5, 37, "VCC")
-    s.w((5, 44), (-2, 44)); s.w((1, 44), (1, 45)); s.C("C42", 1, 47, "d"); s.gnd(1, 49); s.pad("J_BST", -2, 44, "l")
-    s.note(-8, 59, "Boost: BST pad open = boost ON (Q2 conducts, R40 + RV7 + C40 raise the gain above about 700 Hz).\nBST pad grounded by the footswitch = boost OFF.")
     # tight
     s.w((47, 30), (52, 30)); s.w((47, 30), (47, 21)); s.label(47, 21, "S1", "r", "to gate, sheet 5")
     s.C("C3A", 54, 30, "r"); s.C("C3B", 54, 25, "r"); s.w((52, 30), (52, 25)); s.w((56, 25), (56, 30))
@@ -488,6 +478,38 @@ def sheet_gate():
     return s
 
 
+def sheet_boost():
+    s = Sheet("6  Boost section (stands alone: BI pad in, BO pad out)")
+    s.pad("J_BIN", 6, 28, "l"); s.w((6, 28), (13, 28)); s.w((10, 28), (10, 29)); s.R("R80", 10, 32, "d"); s.gnd(10, 35)
+    s.C("C80", 15, 28, "r"); s.w((17, 28), (22, 28)); s.w((20, 28), (20, 27)); s.R("R81", 20, 24, "d"); s.flag(20, 21, "VREF")
+    s.R("R82", 25, 28, "r"); s.w((28, 28), (35, 28)); s.w((29, 28), (29, 29)); s.C("C81", 29, 31, "d"); s.gnd(29, 33)
+    s.opamp("U7", "A", 40, 30, plus_top=True)
+    # level: RV7 is the feedback resistor
+    s.w((35, 32), (33, 32), (33, 38), (37, 38)); s.pot("RV7", 40, 38, "r", "1")
+    s.w((40, 40), (43, 40), (43, 38)); s.w((43, 38), (47, 38)); s.w((47, 43), (47, 30), (45, 30))
+    s.w((33, 38), (33, 43), (38, 43)); s.C("C85", 40, 43, "r"); s.w((42, 43), (47, 43))
+    # voice: R83 with the capacitance chosen by SW3 sets where the boost starts
+    s.w((33, 43), (33, 47)); s.R("R83", 33, 50, "d"); s.w((33, 53), (33, 56)); s.C("C82", 33, 58, "d", left=True); s.flag(33, 60, "VREF", "d")
+    s.w((33, 54), (36, 54)); s.w((36, 54), (38, 54))
+    s.sw("SW3", 41, 54, "r", (25, 0, "1 = mid hump   centre = tight   3 = flat", "left"))
+    s.w((44, 52), (50, 52)); s.C("C83", 52, 52, "r"); s.w((44, 56), (50, 56)); s.C("C84", 52, 56, "r")
+    s.w((54, 52), (57, 52), (57, 58)); s.w((54, 56), (57, 56)); s.flag(57, 58, "VREF", "d")
+    s.R("R84", 47, 47, "r"); s.w((50, 47), (50, 52)); s.R("R85", 47, 61, "r"); s.w((50, 61), (50, 56))
+    s.w((44, 47), (36, 47), (36, 61), (44, 61))
+    # output
+    s.w((47, 30), (52, 30)); s.C("C86", 54, 30, "r"); s.w((56, 30), (58, 30)); s.R("R86", 61, 30, "r"); s.w((64, 30), (72, 30))
+    s.w((68, 30), (68, 31)); s.R("R87", 68, 34, "d"); s.gnd(68, 37); s.pad("J_BOUT", 72, 30, "r")
+    s.opamp("U7", "B", 92, 48, plus_top=True)
+    s.w((87, 46), (85, 46), (85, 44)); s.flag(85, 44, "VREF")
+    s.w((87, 50), (85, 50), (85, 54), (99, 54), (99, 48), (97, 48))
+    s.T(92, 56, "unused half, parked as a follower", size=5.5, color="#555")
+    s.note(4, 66, "Clean boost with its own footswitch; it works with the preamp on or off.\n"
+                  "Gain above the corner = 1 + RV7 / R83: unity (RV7 at zero) to about +21 dB. Below the corner the gain falls back to unity.\n"
+                  "Corner = 1 / (2 pi R83 C): C82 alone 1.6 kHz (tight), C82 + C83 800 Hz (mid hump), C82 + C84 16 Hz (flat, full range).\n"
+                  "R84/R85 keep the switched capacitors charged so the toggle does not pop.")
+    return s
+
+
 def render(sheets, outdir):
     import matplotlib
     matplotlib.use("Agg")
@@ -516,7 +538,7 @@ def render(sheets, outdir):
 
 
 def main():
-    sheets = [sheet_power(), sheet_input(), sheet_clip(), sheet_eq(), sheet_gate()]
+    sheets = [sheet_power(), sheet_input(), sheet_clip(), sheet_eq(), sheet_gate(), sheet_boost()]
     errs = check(sheets)
     for e in errs:
         print("MISMATCH:", e)

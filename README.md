@@ -2,7 +2,7 @@
 
 High-gain preamp pedal by stereoabuse. Derived from the Friedman BE-OD circuit (via the public PedalPCB "Thermionic Distortion" schematic), reworked for downtuned rhythm playing and for driving a power-amp input.
 
-Rev A. Untested hardware: the circuit is simulated and the board passes KiCad DRC, but no board has been built yet.
+Rev B (rev A was never built; its files are kept in `fab/revA/` and under the git tag `revA`). Rev B makes the boost a separate section with its own footswitch, adds a Voice toggle, and carries the Manat logo. Untested hardware: the circuit is simulated and the board passes KiCad DRC, but no board has been built yet.
 
 ![control side](docs/render-control-perspective.png)
 ![SMD side](docs/render-smd-side.png)
@@ -19,30 +19,33 @@ Rev A. Untested hardware: the circuit is simulated and the board passes KiCad DR
 | Volume | A10K pot | Low output impedance for power-amp inputs |
 | Depth | SPDT on-off-on | Post-distortion low thump: flat, +6 dB, +10 dB around 90 Hz |
 | Clip | SPDT on-off-on | Stock soft clip, none (open), single diode pair (saturated) |
-| Bypass | 3PDT footswitch | True bypass |
-| Boost | 3PDT footswitch | TS-style tightening boost into the first stage, up to +12 dB above 700 Hz |
+| Voice | SPDT on-off-on | Boost voicing: mid hump (boost starts near 800 Hz, Tube Screamer style), tight (1.6 kHz), flat (full range) |
+| Preamp | 3PDT footswitch | True bypass for the preamp section |
+| Boost | 3PDT footswitch | True bypass for the boost section |
+
+The pedal is two sections in series, boost then preamp, and each works on its own. Boost alone is a clean, tightening boost for the front of an amp that is already distorting (unity to +21 dB, set by an internal trimmer). Preamp alone is the high-gain sound for a power-amp input. Both on is the preamp with a boost in front.
 
 Inside: gain trim (stock), boost level trim, noise gate threshold trim, and two solder jumpers (18 V or 9 V rail, gate on or off).
 
-Differences from the BE-OD: no Bass knob (Tight and Depth cover it), added Mid, boost, noise gate, clip switch, and an internal charge pump that runs the op-amps at about 16 V from a 9 V supply or battery.
+Differences from the BE-OD: no Bass knob (Tight and Depth cover it), added Mid, a standalone boost, noise gate, clip switch, and an internal charge pump that runs the op-amps at about 16 V from a 9 V supply or battery.
 
 ## Ordering from JLCPCB
 
 Files are in [fab/](fab/).
 
-1. Upload `hg-preamp-revA-gerbers.zip`. Settings: 4 layers, 1.6 mm, 82 x 62.5 mm. Layer order is F, In1, In2, B (`.gtl`, `.g1`, `.g2`, `.gbl`).
+1. Upload `hg-preamp-revB-gerbers.zip`. Settings: 4 layers, 1.6 mm, 82 x 62.5 mm. Layer order is F, In1, In2, B (`.gtl`, `.g1`, `.g2`, `.gbl`).
 2. Turn on PCB Assembly, top side.
-3. Upload `hg-preamp-revA-bom.csv` and `hg-preamp-revA-cpl.csv`.
-4. In the placement preview, check pin 1 on U1 to U6, the two JFETs (Q1, Q2), the diode cathode bars, and the stripe on C20, C27, C28. JLC's rotation convention differs from KiCad's for some packages; the CPL already applies the usual corrections, but this is the step to catch a mistake.
+3. Upload `hg-preamp-revB-bom.csv` and `hg-preamp-revB-cpl.csv`.
+4. In the placement preview, check pin 1 on U1 to U7, the two JFETs (Q1, Q2), the diode cathode bars, and the stripe on C20, C27, C28. JLC's rotation convention differs from KiCad's for some packages; the CPL already applies the usual corrections, but this is the step to catch a mistake.
 
-38 BOM lines, 120 placements. 7 of the lines are JLC "extended" parts (a small one-time fee each). Stock was checked on 2026-11-11.
+38 BOM lines, 128 placements. 7 of the lines are JLC "extended" parts (a small one-time fee each). Stock was checked on 2026-11-11.
 
 ## Parts you solder
 
 | Part | Qty | Notes |
 |---|---|---|
 | Alpha 16 mm right-angle PCB pot (RV16AF-41) | 6 | A1M, C100K, C10K, B100K x2, A10K |
-| Mini toggle, SPDT on-off-on | 2 | Solder lug or PC pin, 4.7 mm lug pitch |
+| Mini toggle, SPDT on-off-on | 3 | Solder lug or PC pin, 4.7 mm lug pitch, body no longer than 13 mm |
 | 3PDT footswitch | 2 | Wired, not board mounted |
 | 3 mm LED | 2 | Any colour |
 | 1/4" jack | 2 | Input must be stereo (battery switching) |
@@ -60,44 +63,51 @@ Drill template (front view, 1:1): [docs/drill-template-1590BB.svg](docs/drill-te
 | Treble | -10.5 | +23.0 | 7.5 |
 | Presence | +10.5 | +23.0 | 7.5 |
 | Gain | +31.5 | +23.0 | 7.5 |
-| Depth | -8.0 | +1.5 | 6.5 |
-| Clip | +8.0 | +1.5 | 6.5 |
+| Depth | -14.0 | +1.5 | 6.5 |
+| Clip | 0.0 | +1.5 | 6.5 |
+| Voice | +14.0 | +1.5 | 6.5 |
 | Mid | -31.5 | -8.0 | 7.5 |
 | Tight | +31.5 | -8.0 | 7.5 |
-| Boost LED | -19.5 | -24.0 | 3.2 |
-| Bypass LED | +19.5 | -24.0 | 3.2 |
-| Boost switch | -27.0 | -43.0 | 12.5 |
-| Bypass switch | +27.0 | -43.0 | 12.5 |
+| Preamp LED | -19.5 | -24.0 | 3.2 |
+| Boost LED | +19.5 | -24.0 | 3.2 |
+| Preamp switch | -27.0 | -43.0 | 12.5 |
+| Boost switch | +27.0 | -43.0 | 12.5 |
 
-The toggles sit sideways (levers move left and right). The battery lies between the footswitches in the board's notch. That fit is snug: check it with a real battery before drilling.
+The toggles sit sideways (levers move left and right), 14 mm apart, which leaves about 1 mm between bodies. The battery lies between the footswitches in the board's notch. That fit is snug: check it with a real battery before drilling.
 
 ## Wiring
 
-Pads are labelled on the SMD side. Looking at the SMD side, the left leg (IN, G, L1) is next to the bypass switch.
+Pads are labelled on the SMD side. Seen from the front of the pedal, the boost switch is on the right (next to the input jack) and the preamp switch is on the left (next to the output jack). The signal goes input jack, boost switch, preamp switch, output jack.
 
-Bypass switch (3PDT, columns A B C, row 2 is the common):
+Board pads, boost side (the leg with the Manat logo above it): IN, G, LED, BO, G, BI. Preamp side: LED, G, +9V, G, G, OUT.
+
+Boost switch (3PDT, columns A B C, row 2 is the common):
+
+| Lug | Goes to |
+|---|---|
+| A1 | board BI (boost in) |
+| A2 | input jack tip |
+| A3 | wire to B3 |
+| B1 | board BO (boost out) |
+| B2 | wire to preamp switch A2 |
+| C1 | board LED (boost side) |
+| C2 | board G |
+| C3 | board BI (grounds the boost input when bypassed) |
+
+Preamp switch:
 
 | Lug | Goes to |
 |---|---|
 | A1 | board IN |
-| A2 | input jack tip |
+| A2 | wire from boost switch B2 |
 | A3 | wire to B3 |
 | B1 | board OUT |
 | B2 | output jack tip |
-| C1 | board L1 (left leg) |
+| C1 | board LED (preamp side) |
 | C2 | board G |
-| C3 | board IN (grounds the input when bypassed) |
+| C3 | board IN (grounds the preamp input when bypassed) |
 
-Boost switch:
-
-| Lug | Goes to |
-|---|---|
-| A2 | board BST |
-| A3 | board G |
-| B1 | board L1 (right leg) |
-| B2 | board L2 |
-
-The boost is on when BST is left open and off when BST is grounded. Wired as above, the boost LED only lights when the pedal is engaged.
+Two wires cross the enclosure: boost switch B2 to preamp switch A2, and preamp switch A1 back to the IN pad. Use shielded wire for both, with the shield soldered to a G pad at one end only. They carry the preamp's input, and they end next to the OUT lug, so unshielded wire there is the most likely cause of squeal at high gain.
 
 Power: DC jack centre pin to G, DC jack sleeve to +9V, battery red to the DC jack switch lug, battery black to the input jack ring lug, input jack sleeve to G.
 
@@ -106,10 +116,10 @@ Use a regulated 9 V centre-negative supply only. The charge pump chip is rated t
 ## Setting the trimmers
 
 - GAIN TRIM: sets how hard the last gain stage is driven. Start at halfway.
-- BST LVL: boost amount and voicing. One end is a tight mid/treble push (+12 dB above 700 Hz), the other a very mild full-range lift (+1 dB). Most of the useful range is in the first quarter of the turn.
+- LEVEL (next to the Voice toggle): boost amount, from unity to +21 dB. Halfway is about +15 dB.
 - GATE: threshold. Turn until hiss cuts off when you mute the strings but sustained notes do not chop.
 
-Toggle positions as designed (seen from the front): Clip lever left is stock, centre is open, right is saturated. Depth lever left is medium, centre is flat, right is deep. If a switch you buy works the other way round, turn it 180 degrees.
+Toggle positions as designed (seen from the front): Clip lever left is stock, centre is open, right is saturated. Depth lever left is medium, centre is flat, right is deep. Voice lever left is mid hump, centre is tight, right is flat. If a switch you buy works the other way round, turn it 180 degrees.
 
 ## If something misbehaves
 
@@ -123,15 +133,16 @@ Everything is generated from [hw/design.py](hw/design.py), which holds the full 
 
 ## Schematic
 
-[docs/schematic.pdf](docs/schematic.pdf), five sheets. It is drawn by `hw/schematic.py`, which extracts the connectivity of the drawing and refuses to write it unless every pin matches the board netlist, so the drawing and the board cannot drift apart. It is a drawing, not a KiCad schematic file.
+[docs/schematic.pdf](docs/schematic.pdf), six sheets. It is drawn by `hw/schematic.py`, which extracts the connectivity of the drawing and refuses to write it unless every pin matches the board netlist, so the drawing and the board cannot drift apart. It is a drawing, not a KiCad schematic file.
 
 | Sheet | Contents |
 |---|---|
 | [1](docs/schematic-1.png) | Power, voltage doubler, VREF, indicator LEDs |
-| [2](docs/schematic-2.png) | Input stage, boost, Tight, gain stage |
+| [2](docs/schematic-2.png) | Preamp input stage, Tight, gain stage |
 | [3](docs/schematic-3.png) | Clip stage, gain trim, Presence, hard clip, gate switch |
 | [4](docs/schematic-4.png) | Treble, Depth, Mid, output |
 | [5](docs/schematic-5.png) | Noise gate sidechain |
+| [6](docs/schematic-6.png) | Boost section |
 
 Regenerate with `uv run --with matplotlib python3 hw/schematic.py`.
 
@@ -141,6 +152,7 @@ Regenerate with `uv run --with matplotlib python3 hw/schematic.py`.
 |---|---|
 | Simulate the netlist in ngspice | `sim/from_design.py` |
 | Draw and verify the schematic | `hw/schematic.py` |
+| Trace the logo for the silkscreen | `hw/logo.py` (from `hw/art/manat-logo.jpg`) |
 | Place parts | `hw/place.py` |
 | Build the KiCad board | `hw/build_pcb.py` |
 | Route (own grid router) | `hw/route.py` |
@@ -153,6 +165,6 @@ Regenerate with `uv run --with matplotlib python3 hw/schematic.py`.
 
 1. Open `hw/pedal.kicad_pcb` in KiCad and look it over.
 2. Pot footprint: 3 pins at 5.0 mm pitch, 16 mm below the shaft, taken from the Alpha RV16AF-41 drawing. Confirm against the pots you buy.
-3. Toggle lug pitch (4.7 mm) against the switches you buy.
+3. Toggle lug pitch (4.7 mm) and body length (13 mm or less, three sit side by side) against the switches you buy.
 4. Battery fit in the 1590BB.
 5. The routing was done by a simple autorouter. It passes DRC with zero violations and the input stage is kept well away from the high-level nodes, but a high-gain layout can still squeal at maximum gain. The Gain Trim is the first thing to back off if it does.

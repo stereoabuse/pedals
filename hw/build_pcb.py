@@ -17,9 +17,9 @@ OUT = os.path.join(HERE, "pedal.kicad_pcb")
 
 TRACK, CLEAR, VIA, VIA_DRILL = 0.25, 0.2, 0.6, 0.3
 POT_LABEL = {"RV1": "TIGHT", "RV2": "GAIN", "RV3": "PRES", "RV4": "TREBLE", "RV5": "MID", "RV6": "VOLUME"}
-PAD_LABEL = {"J_IN": "IN", "J_G2": "G", "J_L1": "L1", "J_L1B": "L1", "J_L2": "L2", "J_BST": "BST",
-             "J_G3": "G", "J_9V": "+9V", "J_G1": "G", "J_G4": "G", "J_OUT": "OUT"}
-SMD_LABEL = {"RV7": "BST LVL", "RV8": "GAIN TRIM", "RV9": "GATE", "JP1": "18V  9V", "JP2": "GATE",
+PAD_LABEL = {"J_IN": "IN", "J_G2": "G", "J_L1": "LED", "J_BOUT": "BO", "J_G3": "G", "J_BIN": "BI",
+             "J_L2": "LED", "J_G5": "G", "J_9V": "+9V", "J_G1": "G", "J_G4": "G", "J_OUT": "OUT"}
+SMD_LABEL = {"JP1": "18V  9V", "JP2": "GATE",
              "TP1": "VCC", "TP2": "VREF", "TP3": "9V"}
 
 
@@ -138,13 +138,13 @@ def main():
                 taper = p["value"].split()[0]
                 text(board, POT_LABEL[ref], sx, sy - 3.2, pcbnew.B_SilkS, 1.4, 0.2)
                 text(board, taper, sx, sy + 3.2, pcbnew.B_SilkS, 1.2, 0.18)
-                text(board, f"{POT_LABEL[ref]} {taper}", sx, sy + 13.2, pcbnew.F_SilkS, 0.9, 0.15)
+                text(board, POT_LABEL[ref], sx, sy + 13.2, pcbnew.F_SilkS, 0.9, 0.15)
                 text(board, "1", sx + 5, sy + 18.2, pcbnew.B_SilkS, 0.8, 0.12)
             elif kind == "SW":
                 sx, sy = PL["sws"][ref]
                 for (xa, ya, xb, yb) in ((-6.6, -4, 6.6, -4), (6.6, -4, 6.6, 4), (6.6, 4, -6.6, 4), (-6.6, 4, -6.6, -4)):
                     line(board, sx + xa, sy + ya, sx + xb, sy + yb, pcbnew.B_SilkS)
-                text(board, p["value"], sx, sy - 2.8, pcbnew.F_SilkS, 0.9, 0.15)
+                text(board, p["value"], sx, sy + 3.0, pcbnew.F_SilkS, 0.9, 0.15)
             else:
                 x, y = pads["1"][0], pads["1"][1]
                 text(board, PAD_LABEL[ref], x, y - 1.9, pcbnew.F_SilkS, 0.8, 0.13)
@@ -172,6 +172,8 @@ def main():
         else:
             x, y, orient, flip = PL["small"][ref]
             rot = (270 if orient == "v" else 0) + (180 if flip else 0)
+            if kind == "TP":                     # pad in the left half of its double slot, label in the right half
+                x -= 1.3
         fp.SetPosition(P(x, y)); fp.SetOrientationDegrees(rot)
         board.Add(fp)
         if ref in PL["small"] and len(p["pins"]) == 2:       # check the rotation convention
@@ -192,16 +194,30 @@ def main():
         fp.Value().SetVisible(False)
         if kind == "U":
             text(board, ref, x, y, pcbnew.F_SilkS, 0.8, 0.13)
+        if ref in PL["trim_label"]:
+            t, dy = PL["trim_label"][ref]
+            text(board, t, x, y + dy, pcbnew.F_SilkS, 0.8, 0.13)
         if ref in SMD_LABEL:
-            dy = {"RV": 4.1, "JP3": -2.0, "JP2": 0, "TP": -1.8}[kind]
-            if kind == "JP2":
-                text(board, SMD_LABEL[ref], x, y + 3.0, pcbnew.F_SilkS, 0.8, 0.13)
+            dy = {"JP3": -2.0, "JP2": 0, "TP": 0}[kind]
+            if kind in ("JP2", "TP"):
+                text(board, SMD_LABEL[ref], x + (-3.85 if kind == "JP2" else 2.3), y, pcbnew.F_SilkS, 0.8, 0.13)
             else:
                 text(board, SMD_LABEL[ref], x, y + dy, pcbnew.F_SilkS, 0.8, 0.13)
 
     # branding
+    lx, ly, _ = PL["logo"]
+    for poly in json.load(open(os.path.join(HERE, "logo.json")))["polys"]:
+        sps = pcbnew.SHAPE_POLY_SET(); sps.NewOutline()
+        for (x, y) in poly["outer"]:
+            sps.Append(FromMM(lx + x), FromMM(ly + y))
+        for hole in poly["holes"]:
+            h = sps.NewHole()
+            for (x, y) in hole:
+                sps.Append(FromMM(lx + x), FromMM(ly + y), -1, h)
+        s = pcbnew.PCB_SHAPE(board); s.SetShape(pcbnew.SHAPE_T_POLY); s.SetPolyShape(sps)
+        s.SetFilled(True); s.SetWidth(0); s.SetLayer(pcbnew.F_SilkS); board.Add(s)
     text(board, "stereoabuse", 81.6, 112.0, pcbnew.B_SilkS, 2.0, 0.3, rot=90)
-    text(board, "stereoabuse", 67.5, 70.6, pcbnew.F_SilkS, 1.5, 0.22)
+    text(board, "stereoabuse", PL["credit"][0], PL["credit"][1], pcbnew.F_SilkS, 1.1, 0.17)
     text(board, f"{NAME} rev {REV}", 118.6, 112.0, pcbnew.B_SilkS, 1.3, 0.2, rot=90)
     text(board, "9V DC ONLY", 100.0, 88.3, pcbnew.B_SilkS, 0.9, 0.15)
     text(board, "CENTER NEG", 100.0, 90.0, pcbnew.B_SilkS, 0.9, 0.15)

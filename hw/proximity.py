@@ -4,8 +4,8 @@ import json, math, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 P = json.load(open(os.path.join(HERE, "pads.json")))["pads"]
 R = json.load(open(os.path.join(HERE, "routes.json")))
-INPUT = {"IN", "NA", "U1AP"}
-HOT = {"S2", "NG", "S4", "NTR", "NP", "NH", "QD", "TW", "T1", "S5", "U3AN", "NM"}
+INPUT = {"IN", "NA", "U1AP", "BIN", "BA", "BP"}
+HOT = {"CP", "CN", "CX", "S2", "NG", "S4", "NTR", "NP", "NH", "QD", "TW", "T1", "S5", "U3AN", "NM"}
 
 def pts(nets):
     out = []

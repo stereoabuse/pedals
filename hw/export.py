@@ -1,14 +1,14 @@
 """Produce everything JLCPCB needs (fab/) plus renders and drawings (docs/)."""
 import csv, json, os, re, shutil, subprocess, zipfile
 from collections import defaultdict
-from design import parts
+from design import parts, REV
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PCB = os.path.join(HERE, "pedal.kicad_pcb")
 CLI = "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli"
 FAB, DOCS, GERB = os.path.join(ROOT, "fab"), os.path.join(ROOT, "docs"), os.path.join(ROOT, "fab", "gerbers")
-NAME = "hg-preamp-revA"
+NAME = "hg-preamp-rev" + REV
 
 def run(*a):
     r = subprocess.run([CLI, *a], capture_output=True, text=True)
@@ -20,7 +20,7 @@ ROT_FIX = [(r"^SOT-23", 180), (r"^SOIC-", 270), (r"^CP_Elec_", 180)]
 SMD_KINDS = {"R", "C", "C08", "C12", "CP", "D", "LED", "U", "Q", "RV"}
 
 def main():
-    shutil.rmtree(FAB, ignore_errors=True)
+    shutil.rmtree(GERB, ignore_errors=True)        # older revisions in fab/ are left alone
     os.makedirs(GERB); os.makedirs(DOCS, exist_ok=True)
     run("pcb", "export", "gerbers", "-o", GERB + "/", "--layers",
         "F.Cu,In1.Cu,In2.Cu,B.Cu,F.Paste,F.SilkS,B.SilkS,F.Mask,B.Mask,Edge.Cuts",

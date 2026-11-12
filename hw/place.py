@@ -20,12 +20,25 @@ def on_board(x0, y0, x1, y1, m=0.6):
 POT_DY = 16.0
 POTS = {"RV2": (68.5, 77), "RV3": (89.5, 77), "RV4": (110.5, 77), "RV6": (131.5, 77),
         "RV1": (68.5, 108), "RV5": (131.5, 108)}
-SWS = {"SW1": (92.0, 98.5), "SW2": (108.0, 98.5)}
+SWS = {"SW3": (86.0, 98.5), "SW1": (100.0, 98.5), "SW2": (114.0, 98.5)}
 LEDS = {"LED5": (80.5, 124.0), "LED6": (119.5, 124.0)}
 PADY = 128.5
-WPADS = {"J_IN": 61.5, "J_G2": 64.04, "J_L1": 66.58,
-         "J_L1B": 118.18, "J_L2": 120.72, "J_BST": 123.26, "J_G3": 125.8,
+WPADS = {"J_IN": 61.5, "J_G2": 64.04, "J_L1": 66.58, "J_BOUT": 71.66, "J_G3": 74.2, "J_BIN": 76.74,
+         "J_L2": 120.72, "J_G5": 123.26,
          "J_9V": 128.34, "J_G1": 130.88, "J_G4": 135.96, "J_OUT": 138.5}
+LOGO = (67.5, 75.2, 15.0)                              # centre x, y, width (SMD side)
+LOGO_ASPECT = 0.84
+CREDIT = (67.5, 82.6)                                  # "stereoabuse", under the logo
+KEEPOUT = [(59.7, 68.6, 75.3, 83.45),
+           (94.3, 89.4, 98.0, 91.2)]                 # logo, GATE jumper label
+
+def label_box(text, x, y, size):
+    w, h = len(text) * size * 0.85 + 0.2, size + 0.3
+    return (x - w / 2, y - h / 2, x + w / 2, y + h / 2)
+
+# silkscreen labels on the SMD side that parts must stay clear of: ref -> (text, dx, dy, size)
+POT_LABEL = {"RV1": "TIGHT", "RV2": "GAIN", "RV3": "PRES", "RV4": "TREBLE", "RV5": "MID", "RV6": "VOLUME"}
+TRIM_LABEL = {"RV7": ("LEVEL", -4.1), "RV8": ("GAIN TRIM", 4.1), "RV9": ("GATE", 4.1)}
 
 def tht_pads():
     """ref -> {pad: (x, y, pad_dia, drill)}"""
@@ -42,17 +55,23 @@ def tht_pads():
 
 # ref: (x, y, rot)
 FIXED = {
-    "U1": (71.0, 112.0, 0), "U2": (80.0, 79.0, 0), "U3": (124.0, 79.0, 0),
+    "U1": (71.0, 112.0, 0),                              # preamp input parts in a column up from the IN pad
+    "C1": (61.2, 121.5, 90), "R1": (63.9, 119.3, 90), "R3": (61.2, 116.6, 90),
+    "R2": (63.9, 115.6, 90), "C2": (61.2, 112.9, 90), "U2": (80.0, 79.0, 0), "U3": (124.0, 79.0, 0),
     "U4": (100.0, 76.0, 0), "U5": (100.0, 86.0, 0), "U6": (120.5, 109.0, 0),
-    "RV7": (81.5, 108.0, 0), "RV8": (87.5, 72.5, 0), "RV9": (108.0, 72.5, 0),
-    "Q1": (100.0, 93.5, 0), "Q2": (81.5, 114.6, 0),
-    "JP1": (128.0, 117.5, 0), "JP2": (100.0, 99.6, 90),
+    "U7": (80.2, 107.3, 0),                              # boost: input parts sit between the BI pad and pin 3
+    "C80": (76.6, 120.6, 90), "R80": (74.0, 119.3, 90), "R81": (79.4, 119.1, 0),
+    "R82": (76.6, 115.4, 90), "C81": (79.6, 111.6, 0),
+    "RV7": (76.4, 98.6, 0), "RV8": (87.5, 72.5, 0), "RV9": (108.0, 72.5, 0),
+    "Q1": (100.0, 93.6, 0),
+    "JP1": (128.0, 117.5, 0), "JP2": (100.0, 90.3, 0),
     "C20": (136.8, 106.0, 90), "C27": (136.8, 115.6, 90), "C28": (137.0, 73.5, 90),
 }
-SLOT_W, SLOT_H = 2.6, 4.0
+SLOT_W, SLOT_H = 2.6, 3.7
 IGNORE = {"GND", "VCC", "VREF", "V9"}
+QUIET = {"BIN", "BA", "BP", "IN", "NA", "U1AP"}        # high-impedance inputs: keep these nets short
 AFFINITY = [("C6", "U1", "8"), ("C7", "U2", "8"), ("C10", "U3", "8"), ("C29", "U4", "8"),
-            ("C30", "U5", "8"), ("C21", "U6", "8"), ("TP1", "C28", "1"), ("TP2", "U4", "1"),
+            ("C30", "U5", "8"), ("C21", "U6", "8"), ("C87", "U7", "8"), ("TP1", "C28", "1"), ("TP2", "U4", "1"),
             ("TP3", "C20", "1"), ("C25", "U4", "3"), ("R32", "U4", "3"), ("R33", "U4", "3")]
 
 
@@ -72,17 +91,21 @@ def courtyard(kind, x, y, rot):
     return (x + min(p[0] for p in pts), y + min(p[1] for p in pts), x + max(p[0] for p in pts), y + max(p[1] for p in pts))
 
 
-def main(seed=1, iters=400000):
+def main(seed=4, iters=400000):
     rnd = random.Random(seed)
     ps = {p["ref"]: p for p in parts()}
     tht = tht_pads()
     pinpos = {}                      # (ref, pad) -> (x, y) for fixed things
-    blocks = []                      # rect keepouts
+    blocks = list(KEEPOUT)           # rect keepouts
     circles = []                     # (x, y, r) keepouts
     for r, pads in tht.items():
         for pad, (x, y, d, _) in pads.items():
             pinpos[(r, pad)] = (x, y)
             circles.append((x, y, d / 2 + 0.45))
+    for r, t in POT_LABEL.items():
+        blocks.append(label_box(t, POTS[r][0], POTS[r][1] + 13.2, 0.9))
+    for r, (t, dy) in TRIM_LABEL.items():
+        blocks.append(label_box(t, FIXED[r][0], FIXED[r][1] + dy, 0.8))
     for r, (x, y, rot) in FIXED.items():
         k = ps[r]["kind"]
         for pad, pos in fixed_pad_pos(k, x, y, rot).items():
@@ -128,7 +151,7 @@ def main(seed=1, iters=400000):
             nets.setdefault(n, []).append((r, pad))
     for i, (a_, b_, pad) in enumerate(AFFINITY):
         nets[f"__aff{i}"] = [(a_, "1"), (b_, pad)]
-    weight = {n: (3.0 if n.startswith("__aff") else 1.0) for n in nets}
+    weight = {n: (3.0 if n.startswith("__aff") else 6.0 if n in QUIET else 1.0) for n in nets}
     nets_of = {}
     for n, pins in nets.items():
         for r, _ in pins:
@@ -228,7 +251,7 @@ def main(seed=1, iters=400000):
         small[r] = [round(x, 3), round(y, 3), "h" if r in is_long else "v", bool(flip[r])]
     out = {"fixed": {r: list(v) for r, v in FIXED.items()}, "small": small,
            "tht": {r: {k: list(v) for k, v in pads.items()} for r, pads in tht.items()},
-           "pots": POTS, "sws": SWS, "leds": LEDS,
+           "pots": POTS, "sws": SWS, "leds": LEDS, "logo": LOGO, "credit": CREDIT, "trim_label": TRIM_LABEL,
            "outline": dict(X0=X0, X1=X1, YT=YT, YM=YM, YB=YB, LEG_L=LEG_L, LEG_R=LEG_R)}
     json.dump(out, open(os.path.join(HERE, "placement.json"), "w"), indent=1)
     return total

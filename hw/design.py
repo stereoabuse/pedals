@@ -5,7 +5,7 @@ the back of the pedal. Front-panel x is mirrored: x_panel = 100 - x.
 """
 
 NAME = "HG PREAMP"
-REV = "A"
+REV = "B"
 
 # kind -> (footprint, pad names in order)
 KINDS = {
@@ -81,9 +81,32 @@ C7    C    100n    VCC GND
 C10   C    100n    VCC GND
 C29   C    100n    VCC GND
 C30   C    100n    VCC GND
-# --- input stage + boost ---
-J_IN  PAD  IN      IN
+# --- boost section (stands alone: BIN -> BOUT) ---
+J_BIN PAD  BIN     BIN
 J_G2  PAD  GND     GND
+R80   R    1M      BIN GND
+C80   C12  47n_NP0 BIN BA
+R81   R    1M      BA VREF
+R82   R    10k     BA BP
+C81   C    47p     BP GND
+U7    U    TL072   BS BN BP GND VREF U7S U7S VCC
+C87   C    100n    VCC GND
+RV7   RV   100k    BN BS BS
+C85   C    100p    BN BS
+R83   R    10k     BN BG
+C82   C    10n_NP0 BG VREF
+SW3   SW   VOICE   VCA BG VCB
+C83   C    10n_NP0 VCA VREF
+R84   R    1M      VCA BG
+C84   C    1u      VCB VREF
+R85   R    1M      VCB BG
+C86   C    1u      BS BO
+R86   R    1k      BO BOUT
+R87   R    100k    BOUT GND
+J_BOUT PAD BOUT    BOUT
+J_G3  PAD  GND     GND
+# --- preamp input stage ---
+J_IN  PAD  IN      IN
 R1    R    1M      IN GND
 C1    C12  47n_NP0 IN NA
 R2    R    470k    NA VREF
@@ -91,18 +114,6 @@ R3    R    10k     NA U1AP
 C2    C    47p     U1AP GND
 R5    R    39k     U1AN S1
 R4    R    22k     U1AN VREF
-R40   R    4.7k    U1AN BX
-RV7   RV   100k    BX BY BY
-C40   C12  47n_NP0 BY BQ
-Q2    Q    MMBF4393 BQ VREF BG
-R41   R    1M      BQ VREF
-R42   R    1M      BG VREF
-C41   C    47n     BG VREF
-D12   D    1N4148W BG BC
-R43   R    100k    BC VCC
-C42   C    100n    BC GND
-J_BST PAD  BST     BC
-J_G3  PAD  GND     GND
 # --- tight + gain stage ---
 C3A   C    10n_NP0 S1 NB
 C3B   C    10n_NP0 S1 NB
@@ -197,12 +208,12 @@ Q1    Q    MMBF4393 QD VREF NGATE
 JP2   JP2  GATE    QD NH
 # --- indicator LEDs ---
 R71   R    3.3k    V9 LA1
-LED5  LEDT BYPASS  LA1 L1
-J_L1  PAD  L1      L1
+LED5  LEDT BOOST   LA1 L1
+J_L1  PAD  LED     L1
 R72   R    3.3k    V9 LA2
-LED6  LEDT BOOST   LA2 L2
-J_L2  PAD  L2      L2
-J_L1B PAD  L1      L1
+LED6  LEDT PREAMP  LA2 L2
+J_L2  PAD  LED     L2
+J_G5  PAD  GND     GND
 """
 
 

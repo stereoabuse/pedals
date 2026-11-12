@@ -16,12 +16,15 @@
 <circle cx="88.50" cy="46.75" r="3.75" fill="none" stroke="black" stroke-width="0.2"/>
 <path d="M87.00 46.75h3M88.50 45.25v3" stroke="black" stroke-width="0.12"/>
 <text x="88.50" y="53.70" text-anchor="middle">GAIN 7.5</text>
-<circle cx="49.00" cy="68.25" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
-<path d="M47.50 68.25h3M49.00 66.75v3" stroke="black" stroke-width="0.12"/>
-<text x="49.00" y="74.70" text-anchor="middle">DEPTH 6.5</text>
-<circle cx="65.00" cy="68.25" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
-<path d="M63.50 68.25h3M65.00 66.75v3" stroke="black" stroke-width="0.12"/>
-<text x="65.00" y="74.70" text-anchor="middle">CLIP 6.5</text>
+<circle cx="43.00" cy="68.25" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M41.50 68.25h3M43.00 66.75v3" stroke="black" stroke-width="0.12"/>
+<text x="43.00" y="74.70" text-anchor="middle">DEPTH 6.5</text>
+<circle cx="57.00" cy="68.25" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M55.50 68.25h3M57.00 66.75v3" stroke="black" stroke-width="0.12"/>
+<text x="57.00" y="74.70" text-anchor="middle">CLIP 6.5</text>
+<circle cx="71.00" cy="68.25" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M69.50 68.25h3M71.00 66.75v3" stroke="black" stroke-width="0.12"/>
+<text x="71.00" y="74.70" text-anchor="middle">VOICE 6.5</text>
 <circle cx="25.50" cy="77.75" r="3.75" fill="none" stroke="black" stroke-width="0.2"/>
 <path d="M24.00 77.75h3M25.50 76.25v3" stroke="black" stroke-width="0.12"/>
 <text x="25.50" y="84.70" text-anchor="middle">MID 7.5</text>
@@ -36,10 +39,10 @@
 <text x="76.50" y="98.55" text-anchor="middle">LED 3.2</text>
 <circle cx="30.00" cy="112.75" r="6.25" fill="none" stroke="black" stroke-width="0.2"/>
 <path d="M28.50 112.75h3M30.00 111.25v3" stroke="black" stroke-width="0.12"/>
-<text x="30.00" y="122.20" text-anchor="middle">BOOST 12.5</text>
+<text x="30.00" y="122.20" text-anchor="middle">PREAMP 12.5</text>
 <circle cx="84.00" cy="112.75" r="6.25" fill="none" stroke="black" stroke-width="0.2"/>
 <path d="M82.50 112.75h3M84.00 111.25v3" stroke="black" stroke-width="0.12"/>
-<text x="84.00" y="122.20" text-anchor="middle">BYPASS 12.5</text>
+<text x="84.00" y="122.20" text-anchor="middle">BOOST 12.5</text>
 <text x="10" y="134.5">1590BB face, FRONT view, 1:1 (print at 100%). mm from face centre: x right, y up.</text>
 <text x="10" y="138.5">Jacks and DC socket go on the top end; mark those from the parts you buy.</text>
 <line x1="10" y1="141.5" x2="60" y2="141.5" stroke="black" stroke-width="0.3"/><text x="62" y="142.5">50 mm check</text>

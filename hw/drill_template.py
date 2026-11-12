@@ -4,12 +4,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 PL = json.load(open(os.path.join(HERE, "placement.json")))
 W, L = 94.0, 119.5                       # 1590BB face, portrait
 NAMES = {"RV1": "TIGHT", "RV2": "GAIN", "RV3": "PRES", "RV4": "TREBLE", "RV5": "MID", "RV6": "VOLUME",
-         "SW1": "CLIP", "SW2": "DEPTH", "LED5": "LED", "LED6": "LED"}
+         "SW1": "CLIP", "SW2": "DEPTH", "SW3": "VOICE", "LED5": "LED", "LED6": "LED"}
 holes = []                                # (name, x_front, y_front, dia)
 for r, (x, y) in PL["pots"].items(): holes.append((NAMES[r], 100 - x, 100 - y, 7.5))
 for r, (x, y) in PL["sws"].items(): holes.append((NAMES[r], 100 - x, 100 - y, 6.5))
 for r, (x, y) in PL["leds"].items(): holes.append((NAMES[r], 100 - x, 100 - y, 3.2))
-holes += [("BYPASS", 27.0, -43.0, 12.5), ("BOOST", -27.0, -43.0, 12.5)]
+holes += [("BOOST", 27.0, -43.0, 12.5), ("PREAMP", -27.0, -43.0, 12.5)]
 m = 10
 def X(x): return m + W / 2 + x
 def Y(y): return m + L / 2 - y
