@@ -7,5 +7,5 @@ __pycache__/
 *.raw
 ~*
 _autosave*
-hw/drc.json
+**/hw/drc.json
 tools/freerouting/*.jar
