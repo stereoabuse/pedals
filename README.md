@@ -31,4 +31,4 @@ Both are derived from the Friedman BE-OD circuit (via the public PedalPCB "Therm
 
 ![screamer SMD side](screamer/docs/render-smd-side.png)
 
-`tools/jlc.py` looks up JLCPCB part stock and prices and is shared by all of them.
+`tools/jlc.py` looks up JLCPCB part stock and prices and is shared by all of them. `tools/wiring.py` draws the wiring diagram in each design's `docs/` folder.

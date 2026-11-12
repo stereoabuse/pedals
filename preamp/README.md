@@ -73,6 +73,10 @@ The toggles sit sideways (levers move left and right). The battery lies between 
 
 ## Wiring
 
+![wiring diagram](docs/wiring.png)
+
+The diagram ([SVG](docs/wiring.svg)) shows every off-board wire. The tables below list the same connections lug by lug.
+
 Pads are labelled on the SMD side. Looking at the SMD side, the left leg (IN, G, L1) is next to the bypass switch.
 
 Bypass switch (3PDT, columns A B C, row 2 is the common):

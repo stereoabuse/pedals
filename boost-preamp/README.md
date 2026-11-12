@@ -77,6 +77,10 @@ The toggles sit sideways (levers move left and right), 14 mm apart, which leaves
 
 ## Wiring
 
+![wiring diagram](docs/wiring.png)
+
+The diagram ([SVG](docs/wiring.svg)) shows every off-board wire. The tables below list the same connections lug by lug.
+
 Pads are labelled on the SMD side. Seen from the front of the pedal, the boost switch is on the right (next to the input jack) and the preamp switch is on the left (next to the output jack). The signal goes input jack, boost switch, preamp switch, output jack.
 
 Board pads, boost side (the leg with the Manat logo above it): IN, G, LED, BO, G, BI. Preamp side: LED, G, +9V, G, G, OUT.

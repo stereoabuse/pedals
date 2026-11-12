@@ -80,6 +80,10 @@ The footswitch is not on the board. A footswitch body is 13 to 17 mm deep and th
 
 ## Wiring
 
+![wiring diagram](docs/wiring.png)
+
+The diagram ([SVG](docs/wiring.svg)) shows every off-board wire. The tables below list the same connections lug by lug.
+
 Pads are labelled on the SMD side. Top edge: +9V, G on one corner and a spare G on the other. Bottom edge: IN, G, LED, G, OUT.
 
 Footswitch (3PDT, columns A B C, row 2 is the common):
