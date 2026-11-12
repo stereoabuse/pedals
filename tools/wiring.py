@@ -104,6 +104,25 @@ DESIGNS = {
                ("PWR", "bat.red", "dc.switch", [(58, 76), (77, 76)]),
                ("GND", "bat.black", "inj.ring", [(46, 134), (57, 134), (57, 143)])],
         notes=["The output jack grounds through the metal enclosure."]),
+    "muff-screamer": dict(
+        title="muff-screamer: off-board wiring", view=(0, 24, 200, 190), pads_below={"J_9V", "J_G1"},
+        things=dict(inj=jack("INPUT JACK (stereo)", 8, 148, "r", ["ring", "tip", "sleeve"]),
+                    out=jack("OUTPUT JACK", 170, 148, "l", ["tip"]),
+                    dc=topbox("DC JACK", 116, 44, 24, dict(switch=120, sleeve=128.34, centre=136)),
+                    bat=topbox("9V BATTERY", 84, 44, 24, dict(black=88, red=104)),
+                    L=switch("SCREAMER footswitch", 70, 162, "CBA"), R=switch("MUFF footswitch", 130, 162)),
+        wires=[("IN", "inj.tip", "pad.J_IN", [(44, 162), (44, 140), (61.5, 140)]),
+               ("GND", "inj.sleeve", "pad.J_G2", [(47, 169), (47, 134), (64.04, 134)]),
+               ("OUT", "pad.J_OUT", "out.tip", [(138.5, 140), (160, 140), (160, 155)]),
+               ("LINK", "L.A1", "pad.J_FT", [(78, 148), (71.66, 148)]),
+               ("GND", "L.A2", "pad.J_G4", [(86, 162), (86, 143), (74.2, 143)]),
+               ("LINK", "R.A2", "pad.J_FM", [(114, 162), (114, 145), (120.72, 145)]),
+               ("GND", "R.A1", "pad.J_G5", [(122, 150), (123.26, 150)]),
+               ("PWR", "dc.sleeve", "pad.J_9V", []), ("GND", "dc.centre", "pad.J_G1", [(136, 64), (130.88, 64)]),
+               ("PWR", "bat.red", "dc.switch", [(104, 64), (120, 64)]),
+               ("GND", "bat.black", "inj.ring", [(88, 64), (38, 64), (38, 155)])],
+        notes=["Each footswitch only shorts its FS pad to a G pad, so one pole of any latching switch does it (two lugs of a 3PDT).",
+               "No signal passes through the footswitches. The output jack grounds through the metal enclosure."]),
 }
 
 

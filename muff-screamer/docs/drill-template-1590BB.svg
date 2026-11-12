@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="114.0mm" height="153.5mm" viewBox="0 0 114.0 153.5" font-family="Helvetica" font-size="2.6">
+<rect x="10" y="10" width="94.0" height="119.5" rx="4" fill="none" stroke="black" stroke-width="0.2"/>
+<line x1="57.0" y1="10" x2="57.0" y2="129.5" stroke="#999" stroke-width="0.1" stroke-dasharray="1 1"/>
+<line x1="10" y1="69.75" x2="104.0" y2="69.75" stroke="#999" stroke-width="0.1" stroke-dasharray="1 1"/>
+<rect x="43.75" y="73.25" width="26.5" height="53" fill="none" stroke="#99c" stroke-width="0.15" stroke-dasharray="2 1"/>
+<text x="57.0" y="99.75" text-anchor="middle" fill="#669">9V battery (inside)</text>
+<circle cx="25.50" cy="46.75" r="3.75" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M24.00 46.75h3M25.50 45.25v3" stroke="black" stroke-width="0.12"/>
+<text x="25.50" y="53.70" text-anchor="middle">VOLUME 7.5</text>
+<circle cx="46.50" cy="46.75" r="3.75" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M45.00 46.75h3M46.50 45.25v3" stroke="black" stroke-width="0.12"/>
+<text x="46.50" y="53.70" text-anchor="middle">SUSTAIN 7.5</text>
+<circle cx="67.50" cy="46.75" r="3.75" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M66.00 46.75h3M67.50 45.25v3" stroke="black" stroke-width="0.12"/>
+<text x="67.50" y="53.70" text-anchor="middle">DRIVE 7.5</text>
+<circle cx="88.50" cy="46.75" r="3.75" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M87.00 46.75h3M88.50 45.25v3" stroke="black" stroke-width="0.12"/>
+<text x="88.50" y="53.70" text-anchor="middle">LEVEL 7.5</text>
+<circle cx="57.00" cy="68.25" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M55.50 68.25h3M57.00 66.75v3" stroke="black" stroke-width="0.12"/>
+<text x="57.00" y="74.70" text-anchor="middle">ORDER 6.5</text>
+<circle cx="25.50" cy="77.75" r="3.75" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M24.00 77.75h3M25.50 76.25v3" stroke="black" stroke-width="0.12"/>
+<text x="25.50" y="84.70" text-anchor="middle">TONE 7.5</text>
+<circle cx="88.50" cy="77.75" r="3.75" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M87.00 77.75h3M88.50 76.25v3" stroke="black" stroke-width="0.12"/>
+<text x="88.50" y="84.70" text-anchor="middle">TONE 7.5</text>
+<circle cx="37.50" cy="93.75" r="1.6" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M36.00 93.75h3M37.50 92.25v3" stroke="black" stroke-width="0.12"/>
+<text x="37.50" y="98.55" text-anchor="middle">LED 3.2</text>
+<circle cx="76.50" cy="93.75" r="1.6" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M75.00 93.75h3M76.50 92.25v3" stroke="black" stroke-width="0.12"/>
+<text x="76.50" y="98.55" text-anchor="middle">LED 3.2</text>
+<circle cx="30.00" cy="112.75" r="6.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M28.50 112.75h3M30.00 111.25v3" stroke="black" stroke-width="0.12"/>
+<text x="30.00" y="122.20" text-anchor="middle">MUFF 12.5</text>
+<circle cx="84.00" cy="112.75" r="6.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M82.50 112.75h3M84.00 111.25v3" stroke="black" stroke-width="0.12"/>
+<text x="84.00" y="122.20" text-anchor="middle">SCREAMER 12.5</text>
+<text x="10" y="134.5">1590BB face, FRONT view, 1:1 (print at 100%). mm from face centre: x right, y up.</text>
+<text x="10" y="138.5">Jacks and DC socket go on the top end; mark those from the parts you buy.</text>
+<line x1="10" y1="141.5" x2="60" y2="141.5" stroke="black" stroke-width="0.3"/><text x="62" y="142.5">50 mm check</text>
+</svg>

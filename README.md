@@ -7,8 +7,9 @@ Guitar pedal boards by stereoabuse. Each folder is a complete, separate design: 
 | [preamp](preamp/) | High-gain preamp with a boost built into its first stage | 1590BB |
 | [boost-preamp](boost-preamp/) | Boost and high-gain preamp as two sections in series, for the band Manat | 1590BB |
 | [screamer](screamer/) | One-knob overdrive: a Tube Screamer with Drive at zero and Level at maximum, Tone only | 1590B2 |
+| [muff-screamer](muff-screamer/) | Black Russian Big Muff and TS808 Tube Screamer with a series / parallel / order toggle | 1590BB |
 
-All three run from a 9 V supply or a battery.
+All four run from a 9 V supply or a battery.
 
 ## The two preamps
 
@@ -30,5 +31,11 @@ Both are derived from the Friedman BE-OD circuit (via the public PedalPCB "Therm
 ## screamer
 
 ![screamer SMD side](screamer/docs/render-smd-side.png)
+
+## muff-screamer
+
+Six knobs, two footswitches, one toggle. Unlike the others, its bypass is buffered rather than true bypass.
+
+![muff-screamer SMD side](muff-screamer/docs/render-smd-side.png)
 
 `tools/jlc.py` looks up JLCPCB part stock and prices and is shared by all of them. `tools/wiring.py` draws the wiring diagram in each design's `docs/` folder.
