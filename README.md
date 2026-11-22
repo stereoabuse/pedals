@@ -8,8 +8,9 @@ Guitar pedal boards by stereoabuse. Each folder is a complete, separate design: 
 | [boost-preamp](boost-preamp/) | Boost and high-gain preamp as two sections in series, for the band Manat | 1590BB |
 | [screamer](screamer/) | One-knob overdrive: a Tube Screamer with Drive at zero and Level at maximum, Tone only | 1590B2 |
 | [muff-screamer](muff-screamer/) | Black Russian Big Muff and TS808 Tube Screamer with a series / parallel / order toggle | 1590BB |
+| [decade-drive](decade-drive/) | Drive with one Level knob and twenty three-way toggles, including a tunable feedback resonator | 1590XX |
 
-All four run from a 9 V supply or a battery.
+All five run from a 9 V supply or a battery.
 
 ## The two preamps
 
@@ -37,5 +38,12 @@ Both are derived from the Friedman BE-OD circuit (via the public PedalPCB "Therm
 Six knobs, two footswitches, one toggle. Unlike the others, its bypass is buffered rather than true bypass.
 
 ![muff-screamer SMD side](muff-screamer/docs/render-smd-side.png)
+
+## decade-drive
+
+No pots except Level. Each of the twenty toggles adds a fixed part when moved up or down from centre, in weighted steps like a decade resistance box, so every setting can be written down and repeated. One row is a feedback section that resonates, scoops or drones at a tuned pitch.
+
+![decade-drive control side](decade-drive/docs/render-control-perspective.png)
+![decade-drive SMD side](decade-drive/docs/render-smd-side.png)
 
 `tools/jlc.py` looks up JLCPCB part stock and prices and is shared by all of them. `tools/wiring.py` draws the wiring diagram in each design's `docs/` folder.

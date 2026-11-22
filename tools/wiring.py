@@ -122,7 +122,26 @@ DESIGNS = {
                ("PWR", "bat.red", "dc.switch", [(104, 64), (120, 64)]),
                ("GND", "bat.black", "inj.ring", [(88, 64), (38, 64), (38, 155)])],
         notes=["Each footswitch only shorts its FS pad to a G pad, so one pole of any latching switch does it (two lugs of a 3PDT).",
-               "No signal passes through the footswitches. The output jack grounds through the metal enclosure."]),
+               "No signal passes through the footswitches. The output jack grounds through the metal enclosure."]),    "decade-drive": dict(
+        title="decade-drive: off-board wiring", view=(6, 18, 190, 200), pads_below={"J_9V", "J_G1"},
+        things=dict(inj=jack("INPUT JACK (stereo)", 14, 168, "r", ["ring", "tip", "sleeve"]),
+                    out=jack("OUTPUT JACK", 164, 168, "l", ["tip"]),
+                    dc=topbox("DC JACK", 110, 36, 28, dict(switch=115, sleeve=124.62, centre=133)),
+                    bat=topbox("9V BATTERY", 62, 36, 26, dict(black=67, red=83)),
+                    S=switch("BYPASS footswitch", 100, 186)),
+        wires=[("IN", "inj.tip", "S.A2", [(80, 182), (80, 186)]), ("IN", "S.A1", "pad.J_IN", [(92, 174), (57, 174)]),
+               ("OUT", "S.B1", "pad.J_OUT", [(100, 171), (117, 171)]),
+               ("OUT", "S.B2", "out.tip", [(100, 189.5), (152, 189.5), (152, 175)]),
+               ("LED", "S.C1", "pad.J_L", [(108, 165), (78, 165)]),
+               ("GND", "S.C2", "pad.J_G4", [(113, 186), (113, 162), (80.54, 162)]),
+               ("JUMP", "S.A3", "S.B3", [(92, 196.5), (100, 196.5)]),
+               ("IN", "S.C3", "S.A1", [(108, 199.5), (84, 199.5), (84, 182.5), (92, 182.5)]),
+               ("GND", "inj.sleeve", "pad.J_G2", [(59.54, 189)]),
+               ("PWR", "dc.sleeve", "pad.J_9V", []), ("GND", "dc.centre", "pad.J_G1", [(133, 57), (122.08, 57)]),
+               ("PWR", "bat.red", "dc.switch", [(83, 57), (115, 57)]),
+               ("GND", "bat.black", "inj.ring", [(67, 57), (44, 57), (44, 175)])],
+        notes=["The output jack grounds through the metal enclosure; the spare G pad next to OUT is for an insulated jack.",
+               "The battery lies behind the board. The toggles and the Level pot solder straight to the board and need no wires."]),
 }
 
 

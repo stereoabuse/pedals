@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="141.0mm" height="179.0mm" viewBox="0 0 141.0 179.0" font-family="Helvetica" font-size="2.2">
+<rect x="10" y="10" width="121.0" height="145.0" rx="4" fill="none" stroke="black" stroke-width="0.2"/>
+<line x1="70.5" y1="10" x2="70.5" y2="155.0" stroke="#999" stroke-width="0.1" stroke-dasharray="1 1"/>
+<line x1="10" y1="82.5" x2="131.0" y2="82.5" stroke="#999" stroke-width="0.1" stroke-dasharray="1 1"/>
+<polygon points="23.50,42.50 117.50,42.50 117.50,142.00 84.50,142.00 84.50,122.50 56.50,122.50 56.50,142.00 23.50,142.00" fill="none" stroke="#99c" stroke-width="0.15" stroke-dasharray="2 1"/>
+<text x="25.5" y="41.3" fill="#669">board outline (inside)</text>
+<circle cx="38.50" cy="51.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M37.00 51.50h3M38.50 50.00v3" stroke="black" stroke-width="0.12"/>
+<text x="38.50" y="57.55" text-anchor="middle">GAIN 9</text>
+<circle cx="54.50" cy="51.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M53.00 51.50h3M54.50 50.00v3" stroke="black" stroke-width="0.12"/>
+<text x="54.50" y="57.55" text-anchor="middle">GAIN 3</text>
+<circle cx="70.50" cy="51.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M69.00 51.50h3M70.50 50.00v3" stroke="black" stroke-width="0.12"/>
+<text x="70.50" y="57.55" text-anchor="middle">GAIN 1</text>
+<circle cx="86.50" cy="51.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M85.00 51.50h3M86.50 50.00v3" stroke="black" stroke-width="0.12"/>
+<text x="86.50" y="57.55" text-anchor="middle">DIODE +</text>
+<circle cx="102.50" cy="51.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M101.00 51.50h3M102.50 50.00v3" stroke="black" stroke-width="0.12"/>
+<text x="102.50" y="57.55" text-anchor="middle">DIODE -</text>
+<circle cx="38.50" cy="68.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M37.00 68.50h3M38.50 67.00v3" stroke="black" stroke-width="0.12"/>
+<text x="38.50" y="74.55" text-anchor="middle">BASS 3</text>
+<circle cx="54.50" cy="68.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M53.00 68.50h3M54.50 67.00v3" stroke="black" stroke-width="0.12"/>
+<text x="54.50" y="74.55" text-anchor="middle">BASS 1</text>
+<circle cx="70.50" cy="68.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M69.00 68.50h3M70.50 67.00v3" stroke="black" stroke-width="0.12"/>
+<text x="70.50" y="74.55" text-anchor="middle">TREBLE 3</text>
+<circle cx="86.50" cy="68.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M85.00 68.50h3M86.50 67.00v3" stroke="black" stroke-width="0.12"/>
+<text x="86.50" y="74.55" text-anchor="middle">TREBLE 1</text>
+<circle cx="102.50" cy="68.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M101.00 68.50h3M102.50 67.00v3" stroke="black" stroke-width="0.12"/>
+<text x="102.50" y="74.55" text-anchor="middle">CLIP</text>
+<circle cx="38.50" cy="85.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M37.00 85.50h3M38.50 84.00v3" stroke="black" stroke-width="0.12"/>
+<text x="38.50" y="91.55" text-anchor="middle">SIGN</text>
+<circle cx="54.50" cy="85.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M53.00 85.50h3M54.50 84.00v3" stroke="black" stroke-width="0.12"/>
+<text x="54.50" y="91.55" text-anchor="middle">AMOUNT 3</text>
+<circle cx="70.50" cy="85.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M69.00 85.50h3M70.50 84.00v3" stroke="black" stroke-width="0.12"/>
+<text x="70.50" y="91.55" text-anchor="middle">AMOUNT 1</text>
+<circle cx="86.50" cy="85.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M85.00 85.50h3M86.50 84.00v3" stroke="black" stroke-width="0.12"/>
+<text x="86.50" y="91.55" text-anchor="middle">PITCH 3</text>
+<circle cx="102.50" cy="85.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M101.00 85.50h3M102.50 84.00v3" stroke="black" stroke-width="0.12"/>
+<text x="102.50" y="91.55" text-anchor="middle">PITCH 1</text>
+<circle cx="38.50" cy="102.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M37.00 102.50h3M38.50 101.00v3" stroke="black" stroke-width="0.12"/>
+<text x="38.50" y="108.55" text-anchor="middle">SAG</text>
+<circle cx="54.50" cy="102.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M53.00 102.50h3M54.50 101.00v3" stroke="black" stroke-width="0.12"/>
+<text x="54.50" y="108.55" text-anchor="middle">GATE</text>
+<circle cx="70.50" cy="102.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M69.00 102.50h3M70.50 101.00v3" stroke="black" stroke-width="0.12"/>
+<text x="70.50" y="108.55" text-anchor="middle">OCTAVE</text>
+<circle cx="86.50" cy="102.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M85.00 102.50h3M86.50 101.00v3" stroke="black" stroke-width="0.12"/>
+<text x="86.50" y="108.55" text-anchor="middle">BLEND</text>
+<circle cx="102.50" cy="102.50" r="3.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M101.00 102.50h3M102.50 101.00v3" stroke="black" stroke-width="0.12"/>
+<text x="102.50" y="108.55" text-anchor="middle">BURST</text>
+<circle cx="70.50" cy="115.50" r="1.6" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M69.00 115.50h3M70.50 114.00v3" stroke="black" stroke-width="0.12"/>
+<text x="70.50" y="119.90" text-anchor="middle">LED 3.2</text>
+<circle cx="34.50" cy="124.00" r="3.75" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M33.00 124.00h3M34.50 122.50v3" stroke="black" stroke-width="0.12"/>
+<text x="34.50" y="130.55" text-anchor="middle">LEVEL 7.5</text>
+<circle cx="70.50" cy="135.50" r="6.25" fill="none" stroke="black" stroke-width="0.2"/>
+<path d="M69.00 135.50h3M70.50 134.00v3" stroke="black" stroke-width="0.12"/>
+<text x="70.50" y="144.55" text-anchor="middle">BYPASS 12.5</text>
+<text x="10" y="160.0" font-size="2.6">1590XX face, FRONT view, 1:1 (print at 100%). mm from face centre: x right, y up. Toggle holes are 6.5 mm.</text>
+<text x="10" y="164.0" font-size="2.6">Jacks and DC socket go on the top end; mark those from the parts you buy.</text>
+<line x1="10" y1="167.0" x2="60" y2="167.0" stroke="black" stroke-width="0.3"/><text x="62" y="168.0" font-size="2.6">50 mm check</text>
+</svg>
